@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "2DA4B60A-44D8-4039-8751-E2C4DA7C476F"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UselessTableViewApp/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15">
+            <Locations>
+               <Location
+                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - 3426839bc834f67e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UselessTableViewApp.ViewController.colorList.getter : Swift.Array&lt;__C.UIColor&gt;"
+                  moduleName = "UselessTableViewApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "45">
+               </Location>
+               <Location
+                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - 962a6137d4ade418"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UselessTableViewApp.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; UselessTableViewApp.ViewController"
+                  moduleName = "UselessTableViewApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "205">
+               </Location>
+               <Location
+                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - f96ade000bbe87da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UselessTableViewApp.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;UselessTableViewApp.ViewController&gt;"
+                  moduleName = "UselessTableViewApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "162">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
