@@ -10,7 +10,6 @@ import UIKit
 class TopTabBarController: UIViewController {
     
     var tabSubviews: [UIView] = []
-    var vcHorizontalConstraints: [NSLayoutConstraint] = []
     let tabBarHeight: CGFloat = 60
     
     var tabBarView: TopTabBar!  // Might delete reference
@@ -52,90 +51,74 @@ class TopTabBarController: UIViewController {
         ])
     }
     
-    private func hideView() {
-        tabSubviews[selectedIndex].isHidden = true
-//        view.backgroundColor = .white
-    }
-    
-    private func showView() {
-        tabSubviews[selectedIndex].isHidden = false
-//        view.backgroundColor = tabSubviews[selectedIndex].backgroundColor
+    private func showViewWithoutAnimation(withIndex index: Int) {
+        view.addSubview(tabSubviews[index])
+        activateConstraints(forView: tabSubviews[index])
     }
     
     private func transition(to finalIndex: Int, onCompletion: (() -> Void)?) {
-        guard finalIndex != selectedIndex else {
-            hideView()
-            selectedIndex = finalIndex
-            showView()
-            return
-        }
+        guard finalIndex != selectedIndex else {return}
         
         guard finalIndex < tabSubviews.count else {return}
         
         let oldView = tabSubviews[selectedIndex]
         let newView = tabSubviews[finalIndex]
         
+        // Whether the new view will slide in from the leading edge
+        let fromLeading: Bool = finalIndex > selectedIndex
+        let screenWidth: CGFloat = UIScreen.main.bounds.width
         
-        // Whether the new view enters from the leading side
-        let fromLeading = finalIndex < selectedIndex
-        let firstAttribute: NSLayoutConstraint.Attribute = fromLeading ? .trailing : .leading,
-            secondAttribute: NSLayoutConstraint.Attribute = fromLeading ? .leading : .trailing
-        let prePositioning = NSLayoutConstraint(item: newView, attribute: firstAttribute, relatedBy: .equal, toItem: self.view, attribute: secondAttribute, multiplier: 1.0, constant: 0.0)
-        let newViewPosition = NSLayoutConstraint(item: newView, attribute: firstAttribute, relatedBy: .equal, toItem: self.view, attribute: firstAttribute, multiplier: 1.0, constant: 0.0)
-        // Note that first and second attribute are swapped here:
-        let oldViewOffScreen = NSLayoutConstraint(item: oldView, attribute: secondAttribute, relatedBy: .equal, toItem: self.view, attribute: firstAttribute, multiplier: 1.0, constant: 0.0)
+        let oldViewFinalFrame = CGRect(
+            x: fromLeading ? screenWidth : -screenWidth,
+            y: oldView.frame.origin.y,
+            width: oldView.bounds.width,
+            height: oldView.bounds.height
+        )
         
+        let newViewInitialFrame = CGRect(
+            x: fromLeading ? -screenWidth : screenWidth,
+            y: oldView.frame.origin.y,
+            width: oldView.bounds.width,
+            height: oldView.bounds.height
+        )
         
-        // The array should hold the active steady-state constraints, not any inactive constraints
-        let oldViewInitialConstraint = vcHorizontalConstraints[selectedIndex]
-        self.view.removeConstraint(oldViewInitialConstraint)  // Remove old view old constraint to reposition
-        // Keep the array updated with active constraints (assuming completion of the animation)
-        self.vcHorizontalConstraints[selectedIndex] = oldViewOffScreen
-        self.vcHorizontalConstraints[finalIndex] = newViewPosition
-        // Place the new view off-screen
-        self.view.addConstraint(prePositioning)
-        newView.isHidden = false
-        selectedIndex = finalIndex
-        self.view.layoutIfNeeded()
-        // TODO: Possible call layout if needed here, before the animation begins
+        newView.frame = newViewInitialFrame
+        view.addSubview(newView)
         
-        UIView.animate(withDuration: 0.1, animations: {
-            self.view.removeConstraint(prePositioning)
-            self.view.addConstraint(newViewPosition)
-            self.view.removeConstraint(oldViewInitialConstraint)
-            self.view.addConstraint(oldViewOffScreen)
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            oldView.isHidden = true
-            onCompletion?()
+        let newViewFinalFrame = oldView.frame
+        
+        UIView.animate(withDuration: 0.15, animations: {
+            oldView.frame = oldViewFinalFrame
+            newView.frame = newViewFinalFrame
+        }, completion: {_ in
+            self.activateConstraints(forView: newView)
+            oldView.removeFromSuperview()
+            self.selectedIndex = finalIndex
         })
+    }
+    
+    private func activateConstraints(forView newSubview: UIView) {
+        NSLayoutConstraint.activate([
+            newSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            newSubview.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            newSubview.topAnchor.constraint(equalTo: self.tabBarView.bottomAnchor),
+            newSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        ])
     }
     
     func addTabBarItem(withText text: String, forViewController vc: UIViewController) {
         tabBarView.addTabItem(withText: text)
         tabSubviews.append(vc.view)
         addChild(vc)
-        view.addSubview(vc.view)
         vc.didMove(toParent: self)
         vc.view.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            vc.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            vc.view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            vc.view.topAnchor.constraint(equalTo: self.tabBarView.bottomAnchor),
-        ])
         
         // If it doesn't have a view to unwrap then we have bigger problems than we can gracefully handle
-        let horizConstraint = NSLayoutConstraint(item: vc.view!, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        
-        self.view.addConstraint(horizConstraint)
-        vcHorizontalConstraints.append(horizConstraint)
-        
-        vc.view.isHidden = true  // Hidden by default
         
         if tabSubviews.count == 1 {
             selectedIndex = 0  // Show the first view by default
-            showView()
+            showViewWithoutAnimation(withIndex: 0)
         }
     }
 }
@@ -193,7 +176,7 @@ class TopTabBar: UIView {
               let widthConstraint = selectedLineWidthConstraint,
               let beneathView = beneathView as? TopTabItem else {return}
         
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0.15) {
             self.removeConstraints([xConstraint, widthConstraint])
             
             self.selectedLineXConstraint = NSLayoutConstraint(item: self.selectedLine, attribute: .centerX, relatedBy: .equal, toItem: beneathView, attribute: .centerX, multiplier: 1.0, constant: 0.0)

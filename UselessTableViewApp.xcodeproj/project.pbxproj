@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		80409954271C758500BA59CE /* TopTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80409953271C758500BA59CE /* TopTabBarController.swift */; };
+		8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995A271CBF4500BA59CE /* BottomShadowView.swift */; };
 		806DEC182714E3EA00AC1F7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC172714E3EA00AC1F7E /* AppDelegate.swift */; };
 		806DEC1A2714E3EA00AC1F7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC192714E3EA00AC1F7E /* SceneDelegate.swift */; };
 		806DEC1C2714E3EA00AC1F7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC1B2714E3EA00AC1F7E /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		80409953271C758500BA59CE /* TopTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarController.swift; sourceTree = "<group>"; };
+		8040995A271CBF4500BA59CE /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		806DEC142714E3EA00AC1F7E /* UselessTableViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UselessTableViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		806DEC172714E3EA00AC1F7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		806DEC192714E3EA00AC1F7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 			path = TopTabBarUIVC;
 			sourceTree = "<group>";
 		};
+		80409959271CBF2300BA59CE /* ViewBottomShadow */ = {
+			isa = PBXGroup;
+			children = (
+				8040995A271CBF4500BA59CE /* BottomShadowView.swift */,
+			);
+			path = ViewBottomShadow;
+			sourceTree = "<group>";
+		};
 		806DEC0B2714E3EA00AC1F7E = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		806DEC162714E3EA00AC1F7E /* UselessTableViewApp */ = {
 			isa = PBXGroup;
 			children = (
+				80409959271CBF2300BA59CE /* ViewBottomShadow */,
 				80409958271C75D900BA59CE /* TopTabBarUIVC */,
 				80409957271C75BF00BA59CE /* BottomTabBarUIVC */,
 				80409956271C75AC00BA59CE /* BottomTabBar */,
@@ -193,6 +204,7 @@
 			files = (
 				806DEC302714EE1B00AC1F7E /* SpecialTabViewController.swift in Sources */,
 				806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */,
+				8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */,
 				80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */,
 				806DEC2C2714E4F400AC1F7E /* UselessTableViewCell.swift in Sources */,
 				806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */,
