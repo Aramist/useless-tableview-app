@@ -13,27 +13,57 @@ class TopTabBarController: UIViewController {
     let tabBarHeight: CGFloat = 60
     
     var tabBarView: TopTabBar!  // Might delete reference
+    var blackBox: UIView!
+    var shimmer: ShimmerAnimation!
     
     var selectedIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
+//
+//        createTabBar()
+//
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        let vcs: [UIViewController] = [
+//            storyboard.instantiateViewController(withIdentifier: "VCOne"),
+//            storyboard.instantiateViewController(withIdentifier: "VCTwo"),
+//            storyboard.instantiateViewController(withIdentifier: "VCThree")
+//        ]
         
-        createTabBar()
+//        let testVc = vcs.first!
+//        let v = LibraryButtonView()
+//        v.translatesAutoresizingMaskIntoConstraints = false
+//        testVc.view.addSubview(v)
+//        v.registerTouch()
+//        NSLayoutConstraint.activate([
+//            v.leadingAnchor.constraint(equalTo: testVc.view.leadingAnchor, constant: 20),
+//            v.topAnchor.constraint(equalTo: testVc.view.topAnchor, constant: 20),
+//            v.widthAnchor.constraint(equalToConstant: 200),
+//            v.heightAnchor.constraint(equalToConstant: 200),
+//        ])
         
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vcs: [UIViewController] = [
-            storyboard.instantiateViewController(withIdentifier: "VCOne"),
-            storyboard.instantiateViewController(withIdentifier: "VCTwo"),
-            storyboard.instantiateViewController(withIdentifier: "VCThree")
-        ]
+//        let labels: [String] = ["Sources", "Extensions", "Migrate"]
+//
+//        for (headerLabel, vc) in zip(labels, vcs) {
+//            addTabBarItem(withText: headerLabel, forViewController: vc)
+//        }
+        blackBox = UIView()
+        view.addSubview(blackBox)
+        blackBox.backgroundColor = UIColor(white: 0.0, alpha: 1)
+        blackBox.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            blackBox.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            blackBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            blackBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            blackBox.heightAnchor.constraint(equalTo: blackBox.widthAnchor)
+        ])
         
-        let labels: [String] = ["Sources", "Extensions", "Migrate"]
-        
-        for (headerLabel, vc) in zip(labels, vcs) {
-            addTabBarItem(withText: headerLabel, forViewController: vc)
-        }
+        shimmer = ShimmerAnimation(onView: blackBox)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        shimmer.viewDidAppear()
     }
     
     func createTabBar() {
