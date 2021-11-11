@@ -10,13 +10,15 @@ import UIKit
 class LibraryButtonView: UIButton {
     
     
-    let pi: CGFloat = 3.141592653589793
+    let pi: CGFloat = CGFloat.pi
     let iconBackgroundColor: CGColor = UIColor.white.cgColor
     let iconTintColor: CGColor = UIColor(red: 0.1882, green: 0.4000, blue: 0.7451, alpha: 1.0).cgColor
     
     var bookmark: CALayer!
     
-  
+    
+    /// Creates a CAShapeLayer as a sublayer of the view's delegate layer
+    /// - Returns: An empty CAShapeLayer
     private func makeShapeLayer() -> CAShapeLayer {
         let sl = CAShapeLayer()
         sl.contentsScale = UIScreen.main.scale
@@ -29,7 +31,10 @@ class LibraryButtonView: UIButton {
         addTarget(self, action: #selector(touchHandler), for: .touchUpInside)
     }
     
-    // Creates an L with a rounded outer corner
+    
+    /// Creates an L-shaped path with a rounded outer corner.
+    /// - Parameter frame: Frame of the parent shape layer
+    /// - Returns: A CGPath encoding the drawing
     private func computeLeftBottomEdgePath(withFrame frame: CGRect) -> CGPath {
         let edgePath = UIBezierPath()
         let width = frame.width,
@@ -74,7 +79,10 @@ class LibraryButtonView: UIButton {
         return edgePath.cgPath
     }
     
-    // Creates a square with rounded corners
+    
+    /// Forms a square with rounded corners
+    /// - Parameter frame: Frame of the parent shape layer
+    /// - Returns: A CGPath containing the drawing
     private func computeBookOuterPath(withFrame frame: CGRect) -> CGPath {
         let bookOuterPath = UIBezierPath()
         let width = frame.width,

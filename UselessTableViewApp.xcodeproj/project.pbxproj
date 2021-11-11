@@ -11,6 +11,7 @@
 		8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995A271CBF4500BA59CE /* BottomShadowView.swift */; };
 		8040995F271CC77400BA59CE /* HeaderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995E271CC77400BA59CE /* HeaderTabBarController.swift */; };
 		80409961271CC85200BA59CE /* LibraryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80409960271CC85200BA59CE /* LibraryButtonView.swift */; };
+		804B7ED7273C9AFD001F2DD0 /* HistoricalImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */; };
 		805CC41F2737351F00863BFC /* Manga+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805CC41B2737351F00863BFC /* Manga+CoreDataClass.swift */; };
 		805CC4202737351F00863BFC /* Manga+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805CC41C2737351F00863BFC /* Manga+CoreDataProperties.swift */; };
 		805CC4212737351F00863BFC /* Chapter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805CC41D2737351F00863BFC /* Chapter+CoreDataClass.swift */; };
@@ -20,7 +21,6 @@
 		8061160C27360AFE0021DA3A /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8061160B27360AFE0021DA3A /* MangaListViewController.swift */; };
 		806DEC182714E3EA00AC1F7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC172714E3EA00AC1F7E /* AppDelegate.swift */; };
 		806DEC1A2714E3EA00AC1F7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC192714E3EA00AC1F7E /* SceneDelegate.swift */; };
-		806DEC1C2714E3EA00AC1F7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC1B2714E3EA00AC1F7E /* ViewController.swift */; };
 		806DEC1F2714E3EA00AC1F7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806DEC1D2714E3EA00AC1F7E /* Main.storyboard */; };
 		806DEC212714E3EC00AC1F7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 806DEC202714E3EC00AC1F7E /* Assets.xcassets */; };
 		806DEC242714E3EC00AC1F7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806DEC222714E3EC00AC1F7E /* LaunchScreen.storyboard */; };
@@ -30,6 +30,8 @@
 		806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */; };
 		806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC332714F48600AC1F7E /* SpecialTabBar.swift */; };
 		80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */; };
+		80F08FBF273CA42F003293B9 /* historical_images_compact.json in Resources */ = {isa = PBXBuildFile; fileRef = 80F08FBE273CA42F003293B9 /* historical_images_compact.json */; };
+		80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,7 @@
 		8040995A271CBF4500BA59CE /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		8040995E271CC77400BA59CE /* HeaderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTabBarController.swift; sourceTree = "<group>"; };
 		80409960271CC85200BA59CE /* LibraryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryButtonView.swift; sourceTree = "<group>"; };
+		804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageViewController.swift; sourceTree = "<group>"; };
 		805CC41B2737351F00863BFC /* Manga+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manga+CoreDataClass.swift"; sourceTree = "<group>"; };
 		805CC41C2737351F00863BFC /* Manga+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manga+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		805CC41D2737351F00863BFC /* Chapter+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chapter+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -47,7 +50,6 @@
 		806DEC142714E3EA00AC1F7E /* UselessTableViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UselessTableViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		806DEC172714E3EA00AC1F7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		806DEC192714E3EA00AC1F7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		806DEC1B2714E3EA00AC1F7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		806DEC1E2714E3EA00AC1F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		806DEC202714E3EC00AC1F7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		806DEC232714E3EC00AC1F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,8 @@
 		806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBarItem.swift; sourceTree = "<group>"; };
 		806DEC332714F48600AC1F7E /* SpecialTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBar.swift; sourceTree = "<group>"; };
 		80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalViewController.swift; sourceTree = "<group>"; };
+		80F08FBE273CA42F003293B9 /* historical_images_compact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historical_images_compact.json; sourceTree = "<group>"; };
+		80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,15 @@
 			path = TopControllerCustomHeader;
 			sourceTree = "<group>";
 		};
+		804B7ED5273C9AE1001F2DD0 /* LoadJSONTest */ = {
+			isa = PBXGroup;
+			children = (
+				804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */,
+				80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */,
+			);
+			path = LoadJSONTest;
+			sourceTree = "<group>";
+		};
 		806115DE273608B50021DA3A /* ShimmerAnimationTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +183,8 @@
 		806DEC162714E3EA00AC1F7E /* UselessTableViewApp */ = {
 			isa = PBXGroup;
 			children = (
+				80F08FBD273CA41D003293B9 /* res */,
+				804B7ED5273C9AE1001F2DD0 /* LoadJSONTest */,
 				8061160927360AA10021DA3A /* CoreDataTest */,
 				806115DE273608B50021DA3A /* ShimmerAnimationTest */,
 				8040995D271CC74300BA59CE /* TopControllerCustomHeader */,
@@ -180,7 +195,6 @@
 				80409955271C759000BA59CE /* TableViewExperiment */,
 				806DEC172714E3EA00AC1F7E /* AppDelegate.swift */,
 				806DEC192714E3EA00AC1F7E /* SceneDelegate.swift */,
-				806DEC1B2714E3EA00AC1F7E /* ViewController.swift */,
 				806DEC1D2714E3EA00AC1F7E /* Main.storyboard */,
 				806DEC202714E3EC00AC1F7E /* Assets.xcassets */,
 				806DEC222714E3EC00AC1F7E /* LaunchScreen.storyboard */,
@@ -188,6 +202,14 @@
 				806DEC252714E3EC00AC1F7E /* Info.plist */,
 			);
 			path = UselessTableViewApp;
+			sourceTree = "<group>";
+		};
+		80F08FBD273CA41D003293B9 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				80F08FBE273CA42F003293B9 /* historical_images_compact.json */,
+			);
+			path = res;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +273,7 @@
 				806DEC242714E3EC00AC1F7E /* LaunchScreen.storyboard in Resources */,
 				806DEC212714E3EC00AC1F7E /* Assets.xcassets in Resources */,
 				806DEC1F2714E3EA00AC1F7E /* Main.storyboard in Resources */,
+				80F08FBF273CA42F003293B9 /* historical_images_compact.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,18 +291,19 @@
 				805CC4202737351F00863BFC /* Manga+CoreDataProperties.swift in Sources */,
 				8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */,
 				8061160C27360AFE0021DA3A /* MangaListViewController.swift in Sources */,
+				80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */,
 				80409961271CC85200BA59CE /* LibraryButtonView.swift in Sources */,
 				80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */,
 				806DEC2C2714E4F400AC1F7E /* UselessTableViewCell.swift in Sources */,
 				806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */,
 				806DEC2E2714E50D00AC1F7E /* SecondTableViewCell.swift in Sources */,
-				806DEC1C2714E3EA00AC1F7E /* ViewController.swift in Sources */,
 				80409954271C758500BA59CE /* TopTabBarController.swift in Sources */,
 				805CC41F2737351F00863BFC /* Manga+CoreDataClass.swift in Sources */,
 				806115DA2735DE3E0021DA3A /* ShimmerAnimation.swift in Sources */,
 				806DEC182714E3EA00AC1F7E /* AppDelegate.swift in Sources */,
 				805CC4212737351F00863BFC /* Chapter+CoreDataClass.swift in Sources */,
 				805CC4222737351F00863BFC /* Chapter+CoreDataProperties.swift in Sources */,
+				804B7ED7273C9AFD001F2DD0 /* HistoricalImageViewController.swift in Sources */,
 				806DEC1A2714E3EA00AC1F7E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

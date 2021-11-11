@@ -9,11 +9,8 @@ import UIKit
 
 class MangaListViewController: UIViewController {
     
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     let cdContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-    
     var mangaDirectory: [Manga]?
-    
     
     @IBOutlet weak var mangaNameTable: UITableView!
     
@@ -26,7 +23,8 @@ class MangaListViewController: UIViewController {
         queryManga()
     }
     
-
+    
+    /// Fetches all manga objects from persistent storage
     func queryManga() {
         let fetchRequest = Manga.fetchRequest()
         do {
@@ -41,6 +39,10 @@ class MangaListViewController: UIViewController {
         }
     }
     
+    /// Adds a manga object to the persistent store
+    /// - Parameters:
+    ///   - title: Title of the manga
+    ///   - chapters: Number of chapters
     func addManga(withTitle title: String, withChapterCount chapters: Int) {
         guard let cdContext = cdContext else {
             print("No context.")
@@ -60,6 +62,8 @@ class MangaListViewController: UIViewController {
         queryManga()
     }
     
+    /// Removes a manga instance from the persistent store
+    /// - Parameter manga: Qbject to remove
     func removeManga(_ manga: Manga) {
         do {
             cdContext?.delete(manga)
@@ -73,7 +77,8 @@ class MangaListViewController: UIViewController {
     }
     
     
-    @IBAction func didPressAddButton(_ sender: Any?) {
+    /// Presents a display to create a manga object
+    @IBAction func didPressAddButton() {
         let alertView = UIAlertController(title: "Add a manga", message: "Enter title and chapter count", preferredStyle: .alert)
         alertView.addTextField()  // Title
         alertView.addTextField()  // Chapter count
@@ -95,6 +100,11 @@ class MangaListViewController: UIViewController {
 extension MangaListViewController: UITableViewDelegate {}
 
 extension MangaListViewController: UITableViewDataSource {
+    /// Inserts a manga's title into every table row
+    /// - Parameters:
+    ///   - tableView: The table being populated
+    ///   - indexPath: Location of the current entry
+    /// - Returns: A cell for the entry
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mangaCell")
         guard let cell = cell else {
@@ -105,6 +115,11 @@ extension MangaListViewController: UITableViewDataSource {
         return cell
     }
     
+    /// Creates a swipe-to-delete action for each row
+    /// - Parameters:
+    ///   - tableView: The table view receiving the action
+    ///   - indexPath: The location of the current entry
+    /// - Returns: A configuration containing a swipe-to-delete action
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
             let deletionTarget = self.mangaDirectory![indexPath.row]
