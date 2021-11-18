@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tbw-8t-tRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cyz-Jv-waN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -75,7 +75,7 @@
             </objects>
             <point key="canvasLocation" x="-1155.072463768116" y="136.60714285714286"/>
         </scene>
-        <!--Historical Image View Controller-->
+        <!--Detail-->
         <scene sceneID="bxL-Op-oq7">
             <objects>
                 <viewController id="tbw-8t-tRQ" customClass="HistoricalImageViewController" customModule="UselessTableViewApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,24 +84,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="300" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="b2l-9I-1h7">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historicalImageCell" id="BER-Qt-201" customClass="HistoricalImageTableViewCell" customModule="UselessTableViewApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="41"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BER-Qt-201" id="s8C-u9-tEY">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="foX-kg-oum">
-                                                    <rect key="frame" x="10" y="10" width="240" height="21"/>
+                                                    <rect key="frame" x="10" y="10" width="120" height="120"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="240" id="IfP-DR-MOd"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="IfP-DR-MOd"/>
+                                                        <constraint firstAttribute="height" constant="120" id="UfG-Ek-X63"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="499" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I93-RI-MFU" userLabel="Description">
-                                                    <rect key="frame" x="265" y="10" width="139" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="499" horizontalCompressionResistancePriority="500" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I93-RI-MFU" userLabel="Description">
+                                                    <rect key="frame" x="145" y="10" width="259" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -109,7 +110,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="I93-RI-MFU" secondAttribute="trailing" constant="10" id="J4r-gb-CkY"/>
-                                                <constraint firstAttribute="bottom" secondItem="foX-kg-oum" secondAttribute="bottom" constant="10" id="L0V-Cg-i9D"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="foX-kg-oum" secondAttribute="bottom" constant="10" id="L0V-Cg-i9D"/>
                                                 <constraint firstItem="foX-kg-oum" firstAttribute="leading" secondItem="s8C-u9-tEY" secondAttribute="leading" constant="10" id="Lsa-WM-aHi"/>
                                                 <constraint firstItem="I93-RI-MFU" firstAttribute="leading" secondItem="foX-kg-oum" secondAttribute="trailing" constant="15" id="bkG-4L-YFb"/>
                                                 <constraint firstItem="I93-RI-MFU" firstAttribute="top" secondItem="foX-kg-oum" secondAttribute="top" id="heh-9I-0RN"/>
@@ -134,13 +135,63 @@
                             <constraint firstItem="yI5-Q9-F1P" firstAttribute="bottom" secondItem="b2l-9I-1h7" secondAttribute="bottom" id="vgB-kk-bcr"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Detail" id="hT3-43-9Sa"/>
                     <connections>
-                        <outlet property="historicalImageTable" destination="b2l-9I-1h7" id="RQE-Wg-ET4"/>
+                        <outlet property="historicalImageTable" destination="b2l-9I-1h7" id="Obx-HS-1be"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UuU-mO-n48" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1128" y="856"/>
+            <point key="canvasLocation" x="-729" y="1556"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="b0d-1T-L8s">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cyz-Jv-waN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="URw-Y8-AOp">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6nB-Vq-24B" kind="relationship" relationship="viewControllers" id="ZSx-NT-jbp"/>
+                        <segue destination="tbw-8t-tRQ" kind="relationship" relationship="viewControllers" id="3XE-zf-ojr"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ofg-fG-euy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1128.985507246377" y="855.80357142857144"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="TNj-L2-8Gz">
+            <objects>
+                <viewController id="6nB-Vq-24B" customClass="ImageMapViewController" customModule="UselessTableViewApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WPW-0C-8rQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kNi-Hi-vM6">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cVa-Dt-8fe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kNi-Hi-vM6" firstAttribute="top" secondItem="cVa-Dt-8fe" secondAttribute="top" id="VvN-g2-sN9"/>
+                            <constraint firstItem="cVa-Dt-8fe" firstAttribute="bottom" secondItem="kNi-Hi-vM6" secondAttribute="bottom" id="dTV-bg-pn7"/>
+                            <constraint firstItem="kNi-Hi-vM6" firstAttribute="leading" secondItem="cVa-Dt-8fe" secondAttribute="leading" id="f8W-8s-qHr"/>
+                            <constraint firstItem="cVa-Dt-8fe" firstAttribute="trailing" secondItem="kNi-Hi-vM6" secondAttribute="trailing" id="hhb-i6-ilJ"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="ATx-50-3Ax"/>
+                    <connections>
+                        <outlet property="imageMap" destination="kNi-Hi-vM6" id="B5Z-bw-UZe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAf-em-RMv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1528" y="1556"/>
         </scene>
     </scenes>
     <resources>

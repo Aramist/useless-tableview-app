@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		802F530F273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 802F530D273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld */; };
+		802F5312273D4CB70025B27F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802F5311273D4CB70025B27F /* MapKit.framework */; };
 		80409954271C758500BA59CE /* TopTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80409953271C758500BA59CE /* TopTabBarController.swift */; };
 		8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995A271CBF4500BA59CE /* BottomShadowView.swift */; };
 		8040995F271CC77400BA59CE /* HeaderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995E271CC77400BA59CE /* HeaderTabBarController.swift */; };
 		80409961271CC85200BA59CE /* LibraryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80409960271CC85200BA59CE /* LibraryButtonView.swift */; };
+		804388A32744818D008962AE /* ImageMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804388A22744818D008962AE /* ImageMapViewController.swift */; };
+		804388A52744926D008962AE /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804388A42744926D008962AE /* DataLoader.swift */; };
 		804B7ED7273C9AFD001F2DD0 /* HistoricalImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */; };
 		805CC41F2737351F00863BFC /* Manga+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805CC41B2737351F00863BFC /* Manga+CoreDataClass.swift */; };
 		805CC4202737351F00863BFC /* Manga+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805CC41C2737351F00863BFC /* Manga+CoreDataProperties.swift */; };
@@ -29,16 +33,23 @@
 		806DEC302714EE1B00AC1F7E /* SpecialTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC2F2714EE1B00AC1F7E /* SpecialTabViewController.swift */; };
 		806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */; };
 		806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC332714F48600AC1F7E /* SpecialTabBar.swift */; };
+		807EC0D02745D75F005F4963 /* ImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */; };
 		80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */; };
+		80C6973F273D749B00939B9D /* HistoricalImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */; };
+		80C69740273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */; };
 		80F08FBF273CA42F003293B9 /* historical_images_compact.json in Resources */ = {isa = PBXBuildFile; fileRef = 80F08FBE273CA42F003293B9 /* historical_images_compact.json */; };
 		80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		802F530E273CBFD00025B27F /* HistoricalImageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HistoricalImageModel.xcdatamodel; sourceTree = "<group>"; };
+		802F5311273D4CB70025B27F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		80409953271C758500BA59CE /* TopTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarController.swift; sourceTree = "<group>"; };
 		8040995A271CBF4500BA59CE /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		8040995E271CC77400BA59CE /* HeaderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTabBarController.swift; sourceTree = "<group>"; };
 		80409960271CC85200BA59CE /* LibraryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryButtonView.swift; sourceTree = "<group>"; };
+		804388A22744818D008962AE /* ImageMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMapViewController.swift; sourceTree = "<group>"; };
+		804388A42744926D008962AE /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageViewController.swift; sourceTree = "<group>"; };
 		805CC41B2737351F00863BFC /* Manga+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manga+CoreDataClass.swift"; sourceTree = "<group>"; };
 		805CC41C2737351F00863BFC /* Manga+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manga+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -59,7 +70,10 @@
 		806DEC2F2714EE1B00AC1F7E /* SpecialTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabViewController.swift; sourceTree = "<group>"; };
 		806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBarItem.swift; sourceTree = "<group>"; };
 		806DEC332714F48600AC1F7E /* SpecialTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBar.swift; sourceTree = "<group>"; };
+		807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAnnotationView.swift; sourceTree = "<group>"; };
 		80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalViewController.swift; sourceTree = "<group>"; };
+		80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		80F08FBE273CA42F003293B9 /* historical_images_compact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historical_images_compact.json; sourceTree = "<group>"; };
 		80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,12 +83,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				802F5312273D4CB70025B27F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		802F530C273CBFAF0025B27F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */,
+				80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		802F5310273D4CB60025B27F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				802F5311273D4CB70025B27F /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		80409955271C759000BA59CE /* TableViewExperiment */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,8 +162,13 @@
 		804B7ED5273C9AE1001F2DD0 /* LoadJSONTest */ = {
 			isa = PBXGroup;
 			children = (
+				802F530C273CBFAF0025B27F /* Models */,
+				80F08FBD273CA41D003293B9 /* res */,
 				804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */,
+				804388A42744926D008962AE /* DataLoader.swift */,
+				804388A22744818D008962AE /* ImageMapViewController.swift */,
 				80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */,
+				807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */,
 			);
 			path = LoadJSONTest;
 			sourceTree = "<group>";
@@ -169,6 +206,7 @@
 			children = (
 				806DEC162714E3EA00AC1F7E /* UselessTableViewApp */,
 				806DEC152714E3EA00AC1F7E /* Products */,
+				802F5310273D4CB60025B27F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,7 +221,6 @@
 		806DEC162714E3EA00AC1F7E /* UselessTableViewApp */ = {
 			isa = PBXGroup;
 			children = (
-				80F08FBD273CA41D003293B9 /* res */,
 				804B7ED5273C9AE1001F2DD0 /* LoadJSONTest */,
 				8061160927360AA10021DA3A /* CoreDataTest */,
 				806115DE273608B50021DA3A /* ShimmerAnimationTest */,
@@ -199,6 +236,7 @@
 				806DEC202714E3EC00AC1F7E /* Assets.xcassets */,
 				806DEC222714E3EC00AC1F7E /* LaunchScreen.storyboard */,
 				80611602273609D90021DA3A /* MangaModel.xcdatamodeld */,
+				802F530D273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld */,
 				806DEC252714E3EC00AC1F7E /* Info.plist */,
 			);
 			path = UselessTableViewApp;
@@ -284,15 +322,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				807EC0D02745D75F005F4963 /* ImageAnnotationView.swift in Sources */,
 				8040995F271CC77400BA59CE /* HeaderTabBarController.swift in Sources */,
 				806DEC302714EE1B00AC1F7E /* SpecialTabViewController.swift in Sources */,
 				806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */,
 				80611604273609DA0021DA3A /* MangaModel.xcdatamodeld in Sources */,
+				80C6973F273D749B00939B9D /* HistoricalImage+CoreDataClass.swift in Sources */,
 				805CC4202737351F00863BFC /* Manga+CoreDataProperties.swift in Sources */,
 				8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */,
 				8061160C27360AFE0021DA3A /* MangaListViewController.swift in Sources */,
+				802F530F273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld in Sources */,
+				804388A32744818D008962AE /* ImageMapViewController.swift in Sources */,
 				80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */,
 				80409961271CC85200BA59CE /* LibraryButtonView.swift in Sources */,
+				80C69740273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift in Sources */,
 				80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */,
 				806DEC2C2714E4F400AC1F7E /* UselessTableViewCell.swift in Sources */,
 				806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */,
@@ -302,6 +345,7 @@
 				806115DA2735DE3E0021DA3A /* ShimmerAnimation.swift in Sources */,
 				806DEC182714E3EA00AC1F7E /* AppDelegate.swift in Sources */,
 				805CC4212737351F00863BFC /* Chapter+CoreDataClass.swift in Sources */,
+				804388A52744926D008962AE /* DataLoader.swift in Sources */,
 				805CC4222737351F00863BFC /* Chapter+CoreDataProperties.swift in Sources */,
 				804B7ED7273C9AFD001F2DD0 /* HistoricalImageViewController.swift in Sources */,
 				806DEC1A2714E3EA00AC1F7E /* SceneDelegate.swift in Sources */,
@@ -526,6 +570,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		802F530D273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				802F530E273CBFD00025B27F /* HistoricalImageModel.xcdatamodel */,
+			);
+			currentVersion = 802F530E273CBFD00025B27F /* HistoricalImageModel.xcdatamodel */;
+			path = HistoricalImageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		80611602273609D90021DA3A /* MangaModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
