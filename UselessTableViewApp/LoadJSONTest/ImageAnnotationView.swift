@@ -21,12 +21,6 @@ class ImageAnnotationView: MKAnnotationView {
     let annotationWidth: CGFloat = 90
     let clusterCountRadius: CGFloat = 10
     
-    var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
     
     let clusterCountView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
@@ -54,7 +48,7 @@ class ImageAnnotationView: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.frame = CGRect(x: 0, y: 0, width: annotationWidth, height: annotationWidth)
+//        self.frame = CGRect(x: 0, y: 0, width: annotationWidth, height: annotationWidth)
         setupSubviews()
     }
     
@@ -79,30 +73,24 @@ class ImageAnnotationView: MKAnnotationView {
     
     //MARK: private fns
     fileprivate func setupSubviews() {
-        isOpaque = false
-        backgroundColor = .clear
+//        isOpaque = false
+//        backgroundColor = .clear
+        displayPriority = .defaultHigh
         layoutMargins = UIEdgeInsets(top: marginWidth, left: marginWidth, bottom: marginWidth + cornerPointHeight, right: marginWidth)
         translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubview(imageView)
+//
         addSubview(clusterCountView)
         clusterCountView.addSubview(clusterCountLabel)
         clusterCountView.isHidden = true
-        
+//
         NSLayoutConstraint.activate([
-            // Image and parent constraints
-            widthAnchor.constraint(equalToConstant: annotationWidth),
-            imageView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
             // Cluster count constraints
-            clusterCountLabel.centerXAnchor.constraint(equalTo: clusterCountView.centerXAnchor),
-            clusterCountLabel.centerYAnchor.constraint(equalTo: clusterCountView.centerYAnchor),
-            clusterCountView.heightAnchor.constraint(equalToConstant: 2 * clusterCountRadius),
-            clusterCountView.widthAnchor.constraint(equalTo: clusterCountView.heightAnchor),
-            clusterCountView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            clusterCountView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
+//            clusterCountLabel.centerXAnchor.constraint(equalTo: clusterCountView.centerXAnchor),
+//            clusterCountLabel.centerYAnchor.constraint(equalTo: clusterCountView.centerYAnchor),
+//            clusterCountView.heightAnchor.constraint(equalToConstant: 2 * clusterCountRadius),
+//            clusterCountView.widthAnchor.constraint(equalTo: clusterCountView.heightAnchor),
+//            clusterCountView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+//            clusterCountView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
     }
     
@@ -122,13 +110,14 @@ class ImageAnnotationView: MKAnnotationView {
 
         
         if let cachedImage = displayAnnotation.thumbnailImage {
-            imageView.image = cachedImage
-            resize(for: cachedImage)
+            image = copyImage(cachedImage, withWidth: annotationWidth - 2 * marginWidth)
+            
             // If it is a cluster, add the number of images to the corner
-            if let clusterSize = clusterSize {
-                self.clusterCountLabel.text = "\(clusterSize)"
-                self.clusterCountView.isHidden = false
-            }
+//            if let clusterSize = clusterSize {
+//                self.clusterCountLabel.text = "\(clusterSize)"
+//                self.clusterCountView.isHidden = false
+//            }
+            setNeedsDisplay()
         } else {
             displayAnnotation.cacheThumbnailImage() { [weak self] cachedImage, success in
                 guard success,
@@ -137,27 +126,29 @@ class ImageAnnotationView: MKAnnotationView {
                 // Technically success implies cachedImage != nil, but I don't like force unwrapping
                 DispatchQueue.main.async {
                     guard let self = self else {return}
-                    self.imageView.image = cachedImage
-                    self.resize(for: cachedImage)
+                    self.image = self.copyImage(cachedImage, withWidth: self.annotationWidth - 2 * self.marginWidth)
+                    self.setNeedsDisplay()
                     // If it is a cluster, add the number of images to the corner
-                    if let clusterSize = clusterSize {
-                        self.clusterCountLabel.text = "\(clusterSize)"
-                        self.clusterCountView.isHidden = false
-                    }
+//                    if let clusterSize = clusterSize {
+//                        self.clusterCountLabel.text = "\(clusterSize)"
+//                        self.clusterCountView.isHidden = false
+//                    }
                 }
             }
         }
     }
     
-    /// Resizes the parent view to accomodate an image. Does not insert the image into child image view
-    /// - Parameter image: Image to use when calculating new size
-    fileprivate func resize(for image: UIImage) {
-        let aspectRatio = (image.size.height + 2 * marginWidth) / (image.size.width + 2 * marginWidth)
-        let dynamicConstraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: aspectRatio, constant: cornerPointHeight)
-        NSLayoutConstraint.activate([dynamicConstraint])
-        dynamicConstraints.append(dynamicConstraint)
-        // Redraw the background now that the size of the parent view is determined
-        self.setNeedsDisplay()
+    fileprivate func copyImage(_ image: UIImage, withWidth width: CGFloat) -> UIImage? {
+        let scaleRatio = width / image.size.width
+        let newHeight = image.size.height * scaleRatio
+        let newSize = CGSize(width: width, height: newHeight)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, true, image.scale)
+        defer {UIGraphicsEndImageContext()}
+        
+        image.draw(in: CGRect(origin: .zero, size: newSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+        
     }
     
     /// Draws the background as a white rounded rectangle with a pointed bottom-left corner
@@ -196,7 +187,8 @@ class ImageAnnotationView: MKAnnotationView {
             clockwise: true)
         
         drawLayer.path = path.cgPath
-        drawLayer.fillColor = UIColor.white.cgColor
+        drawLayer.backgroundColor = UIColor.clear.cgColor
+        drawLayer.fillColor = UIColor.black.cgColor
         drawLayer.zPosition = -1
     }
 }

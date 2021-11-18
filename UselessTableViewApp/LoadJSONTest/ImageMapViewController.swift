@@ -34,6 +34,12 @@ class ImageMapViewController: UIViewController {
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
+    deinit {
+        // According to this blog post: https://blog.kulman.sk/using-custom-annotation-views-in-mkmapview/
+        // Setting the delegate to nil on deinit avoids a certain bug
+        imageMap.delegate = nil
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         reloadAnnotations()
     }
