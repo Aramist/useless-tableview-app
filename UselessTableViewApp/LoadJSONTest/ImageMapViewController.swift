@@ -20,15 +20,16 @@ class ImageMapViewController: UIViewController {
         super.viewDidLoad()
         delegate = DataLoader()
         imageMap.delegate = self
-//        let testLocation = CLLocationCoordinate2DMake(40.731093, -73.999919)
-//        let testRegion = MKCoordinateRegion(center: testLocation, latitudinalMeters: 300, longitudinalMeters: 300)
-//        imageMap.setRegion(testRegion, animated: true)
+        let testLocation = CLLocationCoordinate2DMake(40.731093, -73.999919)
+        let testRegion = MKCoordinateRegion(center: testLocation, latitudinalMeters: 300, longitudinalMeters: 300)
+        imageMap.setRegion(testRegion, animated: true)
         imageMap.register(ImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: annotationViewReuseIdentifier)
         
         locationManager = CLLocationManager()
         guard let locationManager = locationManager,
               CLLocationManager.significantLocationChangeMonitoringAvailable()
         else {return}
+        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
     }
@@ -67,6 +68,7 @@ extension ImageMapViewController: CLLocationManagerDelegate {
     /// Recomputes nearby images and presents annotations for them
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
+        print("Location manager")
         guard let recentLocation = locations.last else {return}
         
         let region = MKCoordinateRegion(center: recentLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
