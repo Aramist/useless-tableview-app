@@ -39,7 +39,7 @@ class ImageAnnotationView: MKAnnotationView {
     let clusterCountLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         label.text = ""
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -48,13 +48,13 @@ class ImageAnnotationView: MKAnnotationView {
         return label
     }()
     
-    // Constraints that change when the size of the annotation's image changes
-    var dynamicConstraints: [NSLayoutConstraint] = []
+    var aspectRatioConstraint: NSLayoutConstraint?
     
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.frame = CGRect(x: 0, y: 0, width: annotationWidth, height: annotationWidth)
+        isHidden = true
+        frame = CGRect(x: 0, y: 0, width: annotationWidth, height: annotationWidth)
         setupSubviews()
     }
     
@@ -70,11 +70,18 @@ class ImageAnnotationView: MKAnnotationView {
     override func prepareForDisplay() {
         super.prepareForDisplay()
         guard let annotation = annotation else {return}
-        // Removing this will create conflicts because annotation views are recycled
-        clusterCountView.isHidden = true
-        removeConstraints(dynamicConstraints)
-        dynamicConstraints.removeAll()
+        resize(for: annotation)
         showImage(for: annotation)
+    }
+    
+    override func prepareForReuse() {
+        isHidden = true
+        clusterCountView.isHidden = true
+        if let aspectRatioConstraint = aspectRatioConstraint {
+            removeConstraint(aspectRatioConstraint)
+        }
+        aspectRatioConstraint = nil
+        imageView.image = nil
     }
     
     //MARK: private fns
@@ -111,7 +118,6 @@ class ImageAnnotationView: MKAnnotationView {
         var clusterSize: Int?
         
         if let cluster = annotation as? MKClusterAnnotation {
-            print("Annotation was cluster")
             // In this case, displayAnnotation is currently nil
             displayAnnotation = cluster.memberAnnotations.first as? HistoricalImage
             clusterSize = cluster.memberAnnotations.count
@@ -119,45 +125,53 @@ class ImageAnnotationView: MKAnnotationView {
         }
         // displayAnnotation is a random annotation whose image will be displayed
         guard let displayAnnotation = displayAnnotation else {return}
-
+        self.isHidden = false
         
-        if let cachedImage = displayAnnotation.thumbnailImage {
-            imageView.image = cachedImage
-            resize(for: cachedImage)
-            // If it is a cluster, add the number of images to the corner
-            if let clusterSize = clusterSize {
-                self.clusterCountLabel.text = "\(clusterSize)"
-                self.clusterCountView.isHidden = false
-            }
-        } else {
-            displayAnnotation.cacheThumbnailImage() { [weak self] cachedImage, success in
-                guard success,
-                      let cachedImage = cachedImage
-                else {return}
-                // Technically success implies cachedImage != nil, but I don't like force unwrapping
-                DispatchQueue.main.async {
-                    guard let self = self else {return}
-                    self.imageView.image = cachedImage
-                    self.resize(for: cachedImage)
-                    // If it is a cluster, add the number of images to the corner
-                    if let clusterSize = clusterSize {
-                        self.clusterCountLabel.text = "\(clusterSize)"
-                        self.clusterCountView.isHidden = false
-                    }
-                }
-            }
-        }
+//        if let cachedImage = displayAnnotation.thumbnailImage {
+//            imageView.image = cachedImage
+//            resize(for: cachedImage)
+//            // If it is a cluster, add the number of images to the corner
+//            if let clusterSize = clusterSize {
+//                self.clusterCountLabel.text = "\(clusterSize)"
+//                self.clusterCountView.isHidden = false
+//            }
+//            self.isHidden = false
+//        } else {
+//            displayAnnotation.cacheThumbnailImage() { [weak self] cachedImage, success in
+//                guard success,
+//                      let cachedImage = cachedImage
+//                else {return}
+//                // Technically success implies cachedImage != nil, but I don't like force unwrapping
+//                DispatchQueue.main.async {
+//                    guard let self = self else {return}
+//                    self.imageView.image = cachedImage
+//                    self.resize(for: cachedImage)
+//                    // If it is a cluster, add the number of images to the corner
+//                    if let clusterSize = clusterSize {
+//                        self.clusterCountLabel.text = "\(clusterSize)"
+//                        self.clusterCountView.isHidden = false
+//                    }
+//                    self.isHidden = false
+//                }
+//            }
+//        }
     }
     
     /// Resizes the parent view to accomodate an image. Does not insert the image into child image view
     /// - Parameter image: Image to use when calculating new size
-    fileprivate func resize(for image: UIImage) {
-        let aspectRatio = (image.size.height + 2 * marginWidth) / (image.size.width + 2 * marginWidth)
-        let dynamicConstraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: aspectRatio, constant: cornerPointHeight)
-        NSLayoutConstraint.activate([dynamicConstraint])
-        dynamicConstraints.append(dynamicConstraint)
-        // Redraw the background now that the size of the parent view is determined
-        self.setNeedsDisplay()
+    fileprivate func resize(for annotation: MKAnnotation) {
+        let image: HistoricalImage? = (annotation is MKClusterAnnotation) ?
+        (annotation as! MKClusterAnnotation).memberAnnotations.first as? HistoricalImage :
+        (annotation as? HistoricalImage)
+        guard let image = image else {return}
+        
+        let height: CGFloat = CGFloat(image.imageHeight),
+            width: CGFloat = CGFloat(image.imageWidth)
+        let aspectRatio = (height + 2 * marginWidth) / (width + 2 * marginWidth)
+        let aspectRatioConstraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: aspectRatio, constant: cornerPointHeight)
+        self.addConstraint(aspectRatioConstraint)
+        aspectRatioConstraint.isActive = true
+        setNeedsDisplay()
     }
     
     /// Draws the background as a white rounded rectangle with a pointed bottom-left corner

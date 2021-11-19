@@ -24,7 +24,8 @@ extension HistoricalImage {
     @NSManaged public var latitude: Float
     @NSManaged public var longitude: Float
     @NSManaged public var intersection: String?
-
+    @NSManaged public var imageHeight: Int32
+    @NSManaged public var imageWidth: Int32
 }
 
 extension HistoricalImage : Identifiable {

@@ -39,44 +39,77 @@ class ImageMapViewController: UIViewController {
     }
     
     fileprivate func reloadAnnotations() {
-        if let annotations = delegate?.imageMap(self, annotationsForRegion: imageMap.region) {
-            imageMap.removeAnnotations(imageMap.annotations)
-            imageMap.addAnnotations(annotations)
+        guard let annotations = imageMap.annotations.filter {$0 is HistoricalImage} as? [HistoricalImage]
+        else {
+            return
+        }
+        
+        let startTime = Date()
+        if let annotationUpdate = delegate?.imageMap(self, annotationsForRegion: imageMap.region, withPriorAnnotations: annotations) {
+//            imageMap.removeAnnotations(annotationUpdate.staleAnnotations)
+            imageMap.addAnnotations(annotationUpdate.newAnnotations)
+            print("Stale count: \(annotationUpdate.staleAnnotations.count),\tNew count: \(annotationUpdate.newAnnotations.count),\tRuntime: \(-startTime.timeIntervalSinceNow)")
         }
     }
     
 }
 
+//MARK: Conformance Extensions
 extension ImageMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotationIsCustom(annotation) else {return nil}
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationViewReuseIdentifier)
         if annotationView == nil {
             annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: annotationViewReuseIdentifier)
         }
-        annotationView?.clusteringIdentifier = "HistoricalImages"
+        guard let annotationView = annotationView else {return nil}
         
+        if annotation is HistoricalImage {
+            annotationView.clusteringIdentifier = "HistoricalImages"
+        }
+
         return annotationView
     }
     
-//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
-//        let cluster = MKClusterAnnotation(memberAnnotations: memberAnnotations)
-//        return cluster
-//    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("regionDidChangeAnimated")
+        reloadAnnotations()
+    }
+    
+    //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+    //        let cluster = MKClusterAnnotation(memberAnnotations: memberAnnotations)
+    //        return cluster
+    //    }
+    
+    /// Determines whether a given annotation is one of our implementations
+    /// - Parameter annotation: annotation to test
+    /// - Returns: True if annotation is HistoricalImage or cluster of HistoricalImage
+    fileprivate func annotationIsCustom(_ annotation: MKAnnotation) -> Bool{
+        let isHistoricalImage = annotation is HistoricalImage
+        if (isHistoricalImage) {
+            return true
+        }
+        
+        guard let cluster = annotation as? MKClusterAnnotation else {return false}
+        return cluster.memberAnnotations is [HistoricalImage]
+    }
 }
 
 extension ImageMapViewController: CLLocationManagerDelegate {
     /// Recomputes nearby images and presents annotations for them
-    func locationManager(_ manager: CLLocationManager,
-                         didUpdateLocations locations: [CLLocation]) {
-        print("Location manager")
-        guard let recentLocation = locations.last else {return}
-        
-        let region = MKCoordinateRegion(center: recentLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
-        imageMap.setRegion(region, animated: true)
-        reloadAnnotations()
-    }
+    //    func locationManager(_ manager: CLLocationManager,
+    //                         didUpdateLocations locations: [CLLocation]) {
+    //        print("Location manager")
+    //        guard let recentLocation = locations.last else {return}
+    //
+    //        let region = MKCoordinateRegion(center: recentLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+    //        imageMap.setRegion(region, animated: true)
+    //        reloadAnnotations()
+    //    }
 }
 
+//MARK: Delegate protocol
 protocol ImageMapViewControllerDelegate {
-    func imageMap(_ imageMap: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion) -> [HistoricalImage]
+    func imageMap(_ imageMap: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion,  withPriorAnnotations prior: [HistoricalImage]) -> (newAnnotations: [HistoricalImage], staleAnnotations: [HistoricalImage])
 }

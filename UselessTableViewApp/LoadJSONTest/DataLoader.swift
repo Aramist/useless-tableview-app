@@ -21,6 +21,8 @@ class DataLoader {
         var id: String // The id of the image in the NYPL database
         var latitude: Float
         var longitude: Float
+        var height: Int
+        var width: Int
     }
     
     enum DatabaseError: Error {
@@ -76,7 +78,7 @@ class DataLoader {
         )
         request.predicate = predicate
         
-        request.propertiesToFetch = ["photoID", "latitude", "longitude", "thumbnailURL"]
+        request.propertiesToFetch = ["photoID", "latitude", "longitude", "thumbnailURL", "imageWidth", "imageHeight"]
         
         do {
             let nearbyImages = try context.fetch(request)

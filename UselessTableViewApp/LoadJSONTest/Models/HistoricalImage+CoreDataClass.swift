@@ -26,6 +26,8 @@ public class HistoricalImage: NSManagedObject {
         latitude = jsonObject.latitude
         longitude = jsonObject.longitude
         intersection = jsonObject.folder
+        imageWidth = Int32(jsonObject.width)
+        imageHeight = Int32(jsonObject.height)
     }
     
     
