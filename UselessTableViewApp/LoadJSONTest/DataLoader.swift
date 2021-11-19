@@ -64,7 +64,7 @@ class DataLoader {
     
     fileprivate func fetchImages(inRange coordinateRange: [(Float, Float)], withContext context: NSManagedObjectContext) throws -> [HistoricalImage]?{
         let request = HistoricalImage.fetchRequest()
-        request.fetchLimit = 20
+        request.fetchLimit = 5
         let predicate = NSPredicate(
             format: "(%K >= %@) && (%K <= %@) && (%K >= %@) && (%K <= %@)",
             argumentArray: [
@@ -75,6 +75,8 @@ class DataLoader {
             ]
         )
         request.predicate = predicate
+        
+        request.propertiesToFetch = ["photoID", "latitude", "longitude", "thumbnailURL"]
         
         do {
             let nearbyImages = try context.fetch(request)
@@ -121,13 +123,34 @@ class DataLoader {
 
 
 extension DataLoader: ImageMapViewControllerDelegate {
-    func imageMap(_ mapView: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion) -> [HistoricalImage] {
+    func imageMap(_ mapView: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion, withPriorAnnotations prior: [HistoricalImage]) -> (newAnnotations: [HistoricalImage], staleAnnotations: [HistoricalImage]) {
         let coordRange = [
             (Float(region.center.latitude - 1e-3), Float(region.center.longitude - 1e-3)),
             (Float(region.center.latitude + 1e-3), Float(region.center.longitude + 1e-3))
         ]
         
+        let ids = prior.map { (image) -> String in
+            return image.photoID ?? ""
+        }
+        
         let results = try? fetchImages(inRange: coordRange, withContext: context)
-        return results ?? []
+        guard let results = results else {return (newAnnotations: [], staleAnnotations: prior)}
+        let resultIds = results.map { (image) -> String in
+            return image.photoID ?? ""
+        }
+        
+        // All images in results whose id was not in prior annotations
+        let newImages = results.filter {
+            guard let id = $0.photoID else {return false}
+            return !ids.contains(id)
+        }
+        
+        // All images in prior annotations whose id did not appear in results
+        let staleIds = prior.filter {
+            guard let id = $0.photoID else {return false}
+            return !resultIds.contains(id)
+        }
+        
+        return (newAnnotations: newImages, staleAnnotations: staleIds)
     }
 }
