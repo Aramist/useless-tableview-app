@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="HistoricalImage" representedClassName=".HistoricalImage" versionHashModifier="3" syncable="YES">
+    <entity name="HistoricalImage" representedClassName=".HistoricalImage" versionHashModifier="4" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String"/>
-        <attribute name="imageHeight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="imageWidth" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageHeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageWidth" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="intersection" optional="YES" attributeType="String"/>
+        <attribute name="photoDescription" optional="YES" attributeType="String"/>
+        <attribute name="photoID" attributeType="String"/>
+        <attribute name="photoURL" attributeType="String"/>
+        <attribute name="thumbnailURL" attributeType="String"/>
+        <relationship name="parentGroup" maxCount="1" deletionRule="Nullify" destinationEntity="ImageGroup" inverseName="images" inverseEntity="ImageGroup"/>
+    </entity>
+    <entity name="ImageGroup" representedClassName=".ImageGroup" versionHashModifier="4" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="photoDescription" optional="YES" attributeType="String"/>
-        <attribute name="photoID" optional="YES" attributeType="String"/>
-        <attribute name="photoURL" optional="YES" attributeType="String"/>
-        <attribute name="thumbnailURL" optional="YES" attributeType="String"/>
+        <relationship name="images" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="HistoricalImage" inverseName="parentGroup" inverseEntity="HistoricalImage"/>
         <fetchIndex name="byPropertyIndex">
             <fetchIndexElement property="latitude" type="Binary" order="ascending"/>
             <fetchIndexElement property="longitude" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <elements>
-        <element name="HistoricalImage" positionX="-63" positionY="-18" width="128" height="179"/>
+        <element name="HistoricalImage" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="ImageGroup" positionX="-63" positionY="45" width="128" height="74"/>
     </elements>
 </model>

@@ -12,15 +12,20 @@ import UIKit
 
 class DataLoader {
     
-    struct HistoricalImageJSON: Codable{
-        var thumb_url: String  // Thumbnail, useful for map view
-        var image_url: String  // Full image, useful for detail view
-        var date: String  // The year the photo was taken
-        var text: String?  // A description of the image
-        var folder: String  // Seems to contain the intersection at which the photo was taken
-        var id: String // The id of the image in the NYPL database
+    
+    struct JSONHistoricalImageGroup: Codable {
         var latitude: Float
         var longitude: Float
+        var photos: [JSONHistoricalImage]
+    }
+    
+    struct JSONHistoricalImage: Codable{
+        var thumb_url: String  // Thumbnail, useful for map view
+        var image_url: String  // Full image, useful for detail view
+        var date: String?  // The year the photo was taken
+        var text: String?  // A description of the image
+        var folder: String?  // Seems to contain the intersection at which the photo was taken
+        var id: String // The id of the image in the NYPL database
         var height: Int
         var width: Int
     }
@@ -34,6 +39,7 @@ class DataLoader {
     
     let jsonDataFileName = "historical_images_compact"
     var context: NSManagedObjectContext
+    var dataSuccessfullyLoaded = false
     
     
     init? (){
@@ -41,7 +47,7 @@ class DataLoader {
         context = appDelegate.persistentContainer.viewContext
         
         // If there is not yet a CoreData store for the JSON dataset...
-        let entityCount = try? context.count(for: HistoricalImage.fetchRequest())
+        let entityCount = try? context.count(for: ImageGroup.fetchRequest())
         if entityCount == 0 {
             // Then load the data in using a private context in a background thread
             let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -51,6 +57,7 @@ class DataLoader {
                     try self.loadJSONDatabase(withContext: privateContext)
                     do {
                         try self.context.save()
+                        self.dataSuccessfullyLoaded = true
                     }
                     catch {
                         print("Failed to save main CD context")
@@ -60,25 +67,27 @@ class DataLoader {
                     print(error)
                 }
             }
+        } else {
+            dataSuccessfullyLoaded = true
         }
     }
     
     
-    fileprivate func fetchImages(inRange coordinateRange: [(Float, Float)], withContext context: NSManagedObjectContext) throws -> [HistoricalImage]?{
-        let request = HistoricalImage.fetchRequest()
-        request.fetchLimit = 5
+    fileprivate func fetchImages(inRange coordinateRange: [(Float, Float)], withContext context: NSManagedObjectContext) throws -> [ImageGroup]?{
+        let request = ImageGroup.fetchRequest()
+//        request.fetchLimit = 10
         let predicate = NSPredicate(
             format: "(%K >= %@) && (%K <= %@) && (%K >= %@) && (%K <= %@)",
             argumentArray: [
-                #keyPath(HistoricalImage.latitude), coordinateRange[0].0,
-                #keyPath(HistoricalImage.latitude), coordinateRange[1].0,
-                #keyPath(HistoricalImage.longitude), coordinateRange[0].1,
-                #keyPath(HistoricalImage.longitude), coordinateRange[1].1
+                #keyPath(ImageGroup.latitude), coordinateRange[0].0,
+                #keyPath(ImageGroup.latitude), coordinateRange[1].0,
+                #keyPath(ImageGroup.longitude), coordinateRange[0].1,
+                #keyPath(ImageGroup.longitude), coordinateRange[1].1
             ]
         )
         request.predicate = predicate
         
-        request.propertiesToFetch = ["photoID", "latitude", "longitude", "thumbnailURL", "imageWidth", "imageHeight"]
+//        request.propertiesToFetch = ["latitude", "longitude", "images"]
         
         do {
             let nearbyImages = try context.fetch(request)
@@ -102,13 +111,12 @@ class DataLoader {
                     throw DatabaseError.failedToOpenFile
                 }
                 
-                let jsonImageDataset = try JSONDecoder().decode([HistoricalImageJSON].self, from: jsonData)
-                // Keep references alive until they are saved to the context
-                // Actually, is this necessary? The context is passed into the initializer
-                var referenceCache: [HistoricalImage] = []
+                let jsonImageDataset = try JSONDecoder().decode([JSONHistoricalImageGroup].self, from: jsonData)
+                
+                var refs: [ImageGroup] = []
                 for jsonImageData in jsonImageDataset {
-                    let imageCDObject = HistoricalImage(from: jsonImageData, withContext: privateContext)
-                    referenceCache.append(imageCDObject)
+                    let newGroup = ImageGroup(from: jsonImageData, withContext: privateContext)
+                    refs.append(newGroup)
                 }
                 try privateContext.save()
             }
@@ -119,40 +127,37 @@ class DataLoader {
             catch {
                 throw DatabaseError.failedToOpenFile
             }
+        } else {
+            throw DatabaseError.failedToOpenFile
         }
     }
 }
 
 
 extension DataLoader: ImageMapViewControllerDelegate {
-    func imageMap(_ mapView: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion, withPriorAnnotations prior: [HistoricalImage]) -> (newAnnotations: [HistoricalImage], staleAnnotations: [HistoricalImage]) {
+    func imageMap(_ mapView: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion, withPriorAnnotations prior: [ImageGroup]) -> (newAnnotations: [ImageGroup], staleAnnotations: [ImageGroup]) {
         let coordRange = [
-            (Float(region.center.latitude - 1e-3), Float(region.center.longitude - 1e-3)),
-            (Float(region.center.latitude + 1e-3), Float(region.center.longitude + 1e-3))
+            (Float(region.center.latitude - 2e-3), Float(region.center.longitude - 2e-3)),
+            (Float(region.center.latitude + 2e-3), Float(region.center.longitude + 2e-3))
         ]
         
-        let ids = prior.map { (image) -> String in
-            return image.photoID ?? ""
+        guard dataSuccessfullyLoaded else {
+            return (newAnnotations: [], staleAnnotations: [])
         }
         
-        let results = try? fetchImages(inRange: coordRange, withContext: context)
-        guard let results = results else {return (newAnnotations: [], staleAnnotations: prior)}
-        let resultIds = results.map { (image) -> String in
-            return image.photoID ?? ""
+        guard let results = try? fetchImages(inRange: coordRange, withContext: context)
+        else {
+            return (newAnnotations: [], staleAnnotations: [])
         }
         
-        // All images in results whose id was not in prior annotations
-        let newImages = results.filter {
-            guard let id = $0.photoID else {return false}
-            return !ids.contains(id)
+        let priorIdHashes = prior.map {
+            $0.objectID.hashValue
         }
-        
-        // All images in prior annotations whose id did not appear in results
-        let staleIds = prior.filter {
-            guard let id = $0.photoID else {return false}
-            return !resultIds.contains(id)
+        let newImageGroups = results.filter {
+            !priorIdHashes.contains($0.objectID.hashValue)
         }
+        let staleAnnotations: [ImageGroup] = []
         
-        return (newAnnotations: newImages, staleAnnotations: staleIds)
+        return (newAnnotations: newImageGroups, staleAnnotations: staleAnnotations)
     }
 }

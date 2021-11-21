@@ -2,34 +2,32 @@
 //  HistoricalImage+CoreDataClass.swift
 //  UselessTableViewApp
 //
-//  Created by Aramis on 11/11/21.
+//  Created by Aramis on 11/20/21.
 //
 //
 
-import Foundation
 import CoreData
-import MapKit
+import UIKit
 
-@objc(HistoricalImage)
 public class HistoricalImage: NSManagedObject {
-    
+    //TODO: Implement a static watchdog for the number of cached images to prevent it from going
+    //TODO: above a certain amount. Implement a fileprivate function to decache images not recently
+    //TODO: accessed
     var thumbnailImage: UIImage?
     var fullImage: UIImage?
     
-    convenience init(from jsonObject: DataLoader.HistoricalImageJSON, withContext context: NSManagedObjectContext) {
+    convenience init(from jsonObject: DataLoader.JSONHistoricalImage, withParent parent: ImageGroup, withContext context: NSManagedObjectContext) {
         self.init(context: context)
         date = jsonObject.date
         photoDescription = jsonObject.text
         photoID = jsonObject.id
         photoURL = jsonObject.image_url
         thumbnailURL = jsonObject.thumb_url
-        latitude = jsonObject.latitude
-        longitude = jsonObject.longitude
         intersection = jsonObject.folder
         imageWidth = Int32(jsonObject.width)
         imageHeight = Int32(jsonObject.height)
+        parentGroup = parent
     }
-    
     
     func cacheThumbnailImage(completion: ((_ image: UIImage?, _ success: Bool) -> ())? ) {
         guard let thumbnailString = thumbnailURL,
@@ -71,17 +69,5 @@ public class HistoricalImage: NSManagedObject {
             }
             completion?(nil, false)
         }.resume()
-    }
-}
-
-extension HistoricalImage: MKAnnotation {
-    public var coordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2DMake(Double(latitude), Double(longitude))
-    }
-    public var title: String? {
-        intersection
-    }
-    public var subtitle: String? {
-        date
     }
 }

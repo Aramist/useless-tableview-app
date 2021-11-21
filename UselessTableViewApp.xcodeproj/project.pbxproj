@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		802F530F273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 802F530D273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld */; };
 		802F5312273D4CB70025B27F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802F5311273D4CB70025B27F /* MapKit.framework */; };
+		80340DFD2749B4350083B8CD /* ImageMapViewController+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80340DFC2749B4350083B8CD /* ImageMapViewController+MKMapViewDelegate.swift */; };
 		80409954271C758500BA59CE /* TopTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80409953271C758500BA59CE /* TopTabBarController.swift */; };
 		8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995A271CBF4500BA59CE /* BottomShadowView.swift */; };
 		8040995F271CC77400BA59CE /* HeaderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8040995E271CC77400BA59CE /* HeaderTabBarController.swift */; };
@@ -34,16 +35,22 @@
 		806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */; };
 		806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DEC332714F48600AC1F7E /* SpecialTabBar.swift */; };
 		807EC0D02745D75F005F4963 /* ImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */; };
+		808B04992749B99C002AD94D /* historical_images_compact.json in Resources */ = {isa = PBXBuildFile; fileRef = 808B04982749B99C002AD94D /* historical_images_compact.json */; };
+		808B049E2749BC24002AD94D /* HistoricalImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B049A2749BC24002AD94D /* HistoricalImage+CoreDataClass.swift */; };
+		808B049F2749BC24002AD94D /* HistoricalImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B049B2749BC24002AD94D /* HistoricalImage+CoreDataProperties.swift */; };
+		808B04A02749BC24002AD94D /* ImageGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B049C2749BC24002AD94D /* ImageGroup+CoreDataClass.swift */; };
+		808B04A12749BC24002AD94D /* ImageGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B049D2749BC24002AD94D /* ImageGroup+CoreDataProperties.swift */; };
+		808B04AB2749EE91002AD94D /* LightweightImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AA2749EE91002AD94D /* LightweightImageAnnotationView.swift */; };
+		808B04AE274ABDE1002AD94D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AD274ABDE1002AD94D /* Colors.swift */; };
+		808B04B0274AC637002AD94D /* ClusterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */; };
 		80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */; };
-		80C6973F273D749B00939B9D /* HistoricalImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */; };
-		80C69740273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */; };
-		80F08FBF273CA42F003293B9 /* historical_images_compact.json in Resources */ = {isa = PBXBuildFile; fileRef = 80F08FBE273CA42F003293B9 /* historical_images_compact.json */; };
 		80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		802F530E273CBFD00025B27F /* HistoricalImageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HistoricalImageModel.xcdatamodel; sourceTree = "<group>"; };
 		802F5311273D4CB70025B27F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		80340DFC2749B4350083B8CD /* ImageMapViewController+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageMapViewController+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
 		80409953271C758500BA59CE /* TopTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarController.swift; sourceTree = "<group>"; };
 		8040995A271CBF4500BA59CE /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		8040995E271CC77400BA59CE /* HeaderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTabBarController.swift; sourceTree = "<group>"; };
@@ -71,10 +78,15 @@
 		806DEC312714EEBD00AC1F7E /* SpecialTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBarItem.swift; sourceTree = "<group>"; };
 		806DEC332714F48600AC1F7E /* SpecialTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTabBar.swift; sourceTree = "<group>"; };
 		807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAnnotationView.swift; sourceTree = "<group>"; };
+		808B04982749B99C002AD94D /* historical_images_compact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historical_images_compact.json; sourceTree = "<group>"; };
+		808B049A2749BC24002AD94D /* HistoricalImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		808B049B2749BC24002AD94D /* HistoricalImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		808B049C2749BC24002AD94D /* ImageGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
+		808B049D2749BC24002AD94D /* ImageGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		808B04AA2749EE91002AD94D /* LightweightImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightweightImageAnnotationView.swift; sourceTree = "<group>"; };
+		808B04AD274ABDE1002AD94D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterDetailViewController.swift; sourceTree = "<group>"; };
 		80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalViewController.swift; sourceTree = "<group>"; };
-		80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataClass.swift"; sourceTree = "<group>"; };
-		80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		80F08FBE273CA42F003293B9 /* historical_images_compact.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historical_images_compact.json; sourceTree = "<group>"; };
 		80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,8 +105,10 @@
 		802F530C273CBFAF0025B27F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				80C6973D273D749B00939B9D /* HistoricalImage+CoreDataClass.swift */,
-				80C6973E273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift */,
+				808B049A2749BC24002AD94D /* HistoricalImage+CoreDataClass.swift */,
+				808B049B2749BC24002AD94D /* HistoricalImage+CoreDataProperties.swift */,
+				808B049C2749BC24002AD94D /* ImageGroup+CoreDataClass.swift */,
+				808B049D2749BC24002AD94D /* ImageGroup+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,6 +119,26 @@
 				802F5311273D4CB70025B27F /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		80340DF4274966F60083B8CD /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */,
+				804388A22744818D008962AE /* ImageMapViewController.swift */,
+				808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		80340DF5274967040083B8CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */,
+				80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */,
+				808B04AA2749EE91002AD94D /* LightweightImageAnnotationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		80409955271C759000BA59CE /* TableViewExperiment */ = {
@@ -162,13 +196,13 @@
 		804B7ED5273C9AE1001F2DD0 /* LoadJSONTest */ = {
 			isa = PBXGroup;
 			children = (
+				808B04AC274A86B2002AD94D /* Delegates */,
+				80340DF5274967040083B8CD /* Views */,
+				80340DF4274966F60083B8CD /* View Controllers */,
 				802F530C273CBFAF0025B27F /* Models */,
 				80F08FBD273CA41D003293B9 /* res */,
-				804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */,
 				804388A42744926D008962AE /* DataLoader.swift */,
-				804388A22744818D008962AE /* ImageMapViewController.swift */,
-				80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */,
-				807EC0CF2745D75F005F4963 /* ImageAnnotationView.swift */,
+				808B04AD274ABDE1002AD94D /* Colors.swift */,
 			);
 			path = LoadJSONTest;
 			sourceTree = "<group>";
@@ -242,10 +276,18 @@
 			path = UselessTableViewApp;
 			sourceTree = "<group>";
 		};
+		808B04AC274A86B2002AD94D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				80340DFC2749B4350083B8CD /* ImageMapViewController+MKMapViewDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		80F08FBD273CA41D003293B9 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				80F08FBE273CA42F003293B9 /* historical_images_compact.json */,
+				808B04982749B99C002AD94D /* historical_images_compact.json */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -311,7 +353,7 @@
 				806DEC242714E3EC00AC1F7E /* LaunchScreen.storyboard in Resources */,
 				806DEC212714E3EC00AC1F7E /* Assets.xcassets in Resources */,
 				806DEC1F2714E3EA00AC1F7E /* Main.storyboard in Resources */,
-				80F08FBF273CA42F003293B9 /* historical_images_compact.json in Resources */,
+				808B04992749B99C002AD94D /* historical_images_compact.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,23 +369,29 @@
 				806DEC302714EE1B00AC1F7E /* SpecialTabViewController.swift in Sources */,
 				806DEC322714EEBD00AC1F7E /* SpecialTabBarItem.swift in Sources */,
 				80611604273609DA0021DA3A /* MangaModel.xcdatamodeld in Sources */,
-				80C6973F273D749B00939B9D /* HistoricalImage+CoreDataClass.swift in Sources */,
 				805CC4202737351F00863BFC /* Manga+CoreDataProperties.swift in Sources */,
+				808B049F2749BC24002AD94D /* HistoricalImage+CoreDataProperties.swift in Sources */,
 				8040995B271CBF4500BA59CE /* BottomShadowView.swift in Sources */,
 				8061160C27360AFE0021DA3A /* MangaListViewController.swift in Sources */,
 				802F530F273CBFD00025B27F /* HistoricalImageModel.xcdatamodeld in Sources */,
 				804388A32744818D008962AE /* ImageMapViewController.swift in Sources */,
 				80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */,
 				80409961271CC85200BA59CE /* LibraryButtonView.swift in Sources */,
-				80C69740273D749B00939B9D /* HistoricalImage+CoreDataProperties.swift in Sources */,
+				808B049E2749BC24002AD94D /* HistoricalImage+CoreDataClass.swift in Sources */,
+				80340DFD2749B4350083B8CD /* ImageMapViewController+MKMapViewDelegate.swift in Sources */,
+				808B04A02749BC24002AD94D /* ImageGroup+CoreDataClass.swift in Sources */,
+				808B04A12749BC24002AD94D /* ImageGroup+CoreDataProperties.swift in Sources */,
 				80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */,
 				806DEC2C2714E4F400AC1F7E /* UselessTableViewCell.swift in Sources */,
 				806DEC342714F48600AC1F7E /* SpecialTabBar.swift in Sources */,
+				808B04AB2749EE91002AD94D /* LightweightImageAnnotationView.swift in Sources */,
 				806DEC2E2714E50D00AC1F7E /* SecondTableViewCell.swift in Sources */,
 				80409954271C758500BA59CE /* TopTabBarController.swift in Sources */,
 				805CC41F2737351F00863BFC /* Manga+CoreDataClass.swift in Sources */,
 				806115DA2735DE3E0021DA3A /* ShimmerAnimation.swift in Sources */,
+				808B04AE274ABDE1002AD94D /* Colors.swift in Sources */,
 				806DEC182714E3EA00AC1F7E /* AppDelegate.swift in Sources */,
+				808B04B0274AC637002AD94D /* ClusterDetailViewController.swift in Sources */,
 				805CC4212737351F00863BFC /* Chapter+CoreDataClass.swift in Sources */,
 				804388A52744926D008962AE /* DataLoader.swift in Sources */,
 				805CC4222737351F00863BFC /* Chapter+CoreDataProperties.swift in Sources */,

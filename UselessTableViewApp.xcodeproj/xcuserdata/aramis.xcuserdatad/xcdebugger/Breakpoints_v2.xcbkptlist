@@ -7,109 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E"
+            uuid = "1CB63E79-AF43-4531-892C-C750C05D430B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UselessTableViewApp/ViewController.swift"
+            filePath = "UselessTableViewApp/LoadJSONTest/View Controllers/HistoricalImageDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15">
-            <Locations>
-               <Location
-                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - 3426839bc834f67e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UselessTableViewApp.ViewController.colorList.getter : Swift.Array&lt;__C.UIColor&gt;"
-                  moduleName = "UselessTableViewApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "45">
-               </Location>
-               <Location
-                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - 962a6137d4ade418"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UselessTableViewApp.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; UselessTableViewApp.ViewController"
-                  moduleName = "UselessTableViewApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "205">
-               </Location>
-               <Location
-                  uuid = "0E3C6ABC-EFC6-48D4-A519-9311FAD79F7E - f96ade000bbe87da"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UselessTableViewApp.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;UselessTableViewApp.ViewController&gt;"
-                  moduleName = "UselessTableViewApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aramis/Heap/xcode-projects/UselessTableViewApp/UselessTableViewApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "162">
-               </Location>
-            </Locations>
+            startingLineNumber = "3"
+            endingLineNumber = "3"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9996606F-1FD4-4CD8-8299-98CB8EDB9876"
-            shouldBeEnabled = "No"
+            uuid = "12B3D2B3-FD23-4DE4-9608-A456F60DF0F1"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UselessTableViewApp/LoadJSONTest/HistoricalImageViewController.swift"
+            filePath = "UselessTableViewApp/LoadJSONTest/DataLoader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8CF4B0C8-5905-4359-A6C5-A0CE1AC5D380"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UselessTableViewApp/LoadJSONTest/HistoricalImageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CE2D9CFC-E227-479E-A399-8BBABC3FEC26"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UselessTableViewApp/LoadJSONTest/HistoricalImageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "init?()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
