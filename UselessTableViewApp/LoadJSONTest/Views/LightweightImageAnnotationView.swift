@@ -87,6 +87,8 @@ class LightweightImageAnnotationView: MKAnnotationView {
         let child = ImageAnnotationView()
         childAnnotationView = child
         addSubview(child)
+        print(child.isUserInteractionEnabled)
+        child.isUserInteractionEnabled = true
         NSLayoutConstraint.activate([
             child.leadingAnchor.constraint(equalTo: centerXAnchor),
             child.bottomAnchor.constraint(equalTo: centerYAnchor),

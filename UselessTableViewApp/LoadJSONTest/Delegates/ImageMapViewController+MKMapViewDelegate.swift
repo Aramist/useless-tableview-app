@@ -23,6 +23,15 @@ extension ImageMapViewController: MKMapViewDelegate {
         return annotationView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let imageGroup = view.annotation as? ImageGroup else {return}
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: ClusterDetailViewController.storyboardID) as? ClusterDetailViewController
+        guard let vc = vc else {return}
+        vc.images = imageGroup.imageArray
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         reloadAnnotations()
