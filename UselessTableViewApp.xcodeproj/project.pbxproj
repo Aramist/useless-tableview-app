@@ -44,6 +44,7 @@
 		808B04AB2749EE91002AD94D /* LightweightImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AA2749EE91002AD94D /* LightweightImageAnnotationView.swift */; };
 		808B04AE274ABDE1002AD94D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AD274ABDE1002AD94D /* Colors.swift */; };
 		808B04B0274AC637002AD94D /* ClusterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */; };
+		809D07E1274ED6D000EB9281 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D07E0274ED6D000EB9281 /* ImageDetailViewController.swift */; };
 		80AD1A0C2718876300947F45 /* ExperimentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */; };
 		80F08FC1273CA8CC003293B9 /* HistoricalImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */; };
 		80FD70C0274AFD7600A3C954 /* ImageDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FD70BF274AFD7600A3C954 /* ImageDetailCollectionViewCell.swift */; };
@@ -92,6 +93,7 @@
 		808B04AA2749EE91002AD94D /* LightweightImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightweightImageAnnotationView.swift; sourceTree = "<group>"; };
 		808B04AD274ABDE1002AD94D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterDetailViewController.swift; sourceTree = "<group>"; };
+		809D07E0274ED6D000EB9281 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		80AD1A0B2718876300947F45 /* ExperimentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalViewController.swift; sourceTree = "<group>"; };
 		80F08FC0273CA8CC003293B9 /* HistoricalImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalImageTableViewCell.swift; sourceTree = "<group>"; };
 		80FD70BF274AFD7600A3C954 /* ImageDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				804B7ED6273C9AFD001F2DD0 /* HistoricalImageViewController.swift */,
 				804388A22744818D008962AE /* ImageMapViewController.swift */,
 				808B04AF274AC637002AD94D /* ClusterDetailViewController.swift */,
+				809D07E0274ED6D000EB9281 /* ImageDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				805CC4222737351F00863BFC /* Chapter+CoreDataProperties.swift in Sources */,
 				804B7ED7273C9AFD001F2DD0 /* HistoricalImageViewController.swift in Sources */,
 				806DEC1A2714E3EA00AC1F7E /* SceneDelegate.swift in Sources */,
+				809D07E1274ED6D000EB9281 /* ImageDetailViewController.swift in Sources */,
 				80FD70C0274AFD7600A3C954 /* ImageDetailCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

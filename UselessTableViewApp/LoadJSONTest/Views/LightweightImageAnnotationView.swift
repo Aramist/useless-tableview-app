@@ -40,8 +40,6 @@ class LightweightImageAnnotationView: MKAnnotationView {
     
     var childAnnotationView: ImageAnnotationView?
     
-
-    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         arrangeSubview()
@@ -51,6 +49,12 @@ class LightweightImageAnnotationView: MKAnnotationView {
         super.prepareForDisplay()
         guard let annotation = annotation as? ImageGroup else {return}
         childAnnotationView?.prepareForDisplay(withAnnotation: annotation)
+        isEnabled = false
+        centerOffset = CGPoint(x: bounds.width / 2, y: -bounds.height / 2)
+    }
+    
+    func updateOffset() {
+        centerOffset = CGPoint(x: bounds.width / 2, y: -bounds.height / 2)
     }
     
     
@@ -66,10 +70,12 @@ class LightweightImageAnnotationView: MKAnnotationView {
     
     func activate() {
         childAnnotationView?.show()
+        isEnabled = true
     }
     
     func deactivate() {
         childAnnotationView?.hide()
+        isEnabled = false
     }
     
     fileprivate func arrangeSubview() {
@@ -78,8 +84,8 @@ class LightweightImageAnnotationView: MKAnnotationView {
         NSLayoutConstraint.activate([
             circle.widthAnchor.constraint(equalToConstant: radius * 2),
             circle.heightAnchor.constraint(equalToConstant: radius * 2),
-            circle.centerXAnchor.constraint(equalTo: centerXAnchor),
-            circle.centerYAnchor.constraint(equalTo: centerYAnchor)
+            circle.centerXAnchor.constraint(equalTo: leadingAnchor),
+            circle.centerYAnchor.constraint(equalTo: bottomAnchor)
         ])
         circle.layer.cornerRadius = radius
         circle.subviews.first?.layer.cornerRadius = radius / 2
@@ -87,11 +93,12 @@ class LightweightImageAnnotationView: MKAnnotationView {
         let child = ImageAnnotationView()
         childAnnotationView = child
         addSubview(child)
-        print(child.isUserInteractionEnabled)
-        child.isUserInteractionEnabled = true
+        
         NSLayoutConstraint.activate([
-            child.leadingAnchor.constraint(equalTo: centerXAnchor),
-            child.bottomAnchor.constraint(equalTo: centerYAnchor),
+            child.leadingAnchor.constraint(equalTo: leadingAnchor),
+            child.bottomAnchor.constraint(equalTo: bottomAnchor),
+            child.widthAnchor.constraint(equalTo: widthAnchor),
+            child.heightAnchor.constraint(equalTo: heightAnchor)
         ])
     }
 }

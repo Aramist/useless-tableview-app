@@ -14,7 +14,7 @@ class TestCollectionViewController: UIViewController {
         var width: Int
         var height: Int
     }
-
+    
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
     
@@ -85,15 +85,15 @@ class TestCollectionViewController: UIViewController {
             }.resume()
         }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension TestCollectionViewController: UICollectionViewDataSource {
@@ -122,29 +122,38 @@ extension TestCollectionViewController: UICollectionViewDataSource {
 }
 
 extension TestCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let useWideImage = indexPath.item % 3 == 2
-        let wideIndex = indexPath.item > 1 ? Int((indexPath.item - 2) / 3) : 0
-        // Subtracting wideIndex accounts for the 'gap' in the indices created
-        let im = useWideImage ? wideImages[wideIndex] : narrowImages[indexPath.item - wideIndex]
-        
-        let itemsPerRow: CGFloat = useWideImage ? 1 : 2
-        let padding = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = collectionView.bounds.width - padding
-        let widthForItem = availableWidth / itemsPerRow
-        let aspectRatio = CGFloat(im.height) / CGFloat(im.width)
-        let heightForItem = widthForItem * aspectRatio
-        
-        return CGSize(width: widthForItem, height: heightForItem)
-    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let useWideImage = indexPath.item % 3 == 2
+            let wideIndex = indexPath.item > 1 ? Int((indexPath.item - 2) / 3) : 0
+            // Subtracting wideIndex accounts for the 'gap' in the indices created
+            let im = useWideImage ? wideImages[wideIndex] : narrowImages[indexPath.item - wideIndex]
+            
+            let itemsPerRow: CGFloat = useWideImage ? 1 : 2
+            let padding = sectionInsets.left * (itemsPerRow + 1)
+            let availableWidth = collectionView.bounds.width - padding
+            let widthForItem = availableWidth / itemsPerRow
+            let aspectRatio = CGFloat(im.height) / CGFloat(im.width)
+            let heightForItem = widthForItem * aspectRatio
+            
+            return CGSize(width: widthForItem, height: heightForItem)
+        }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int) -> UIEdgeInsets {
+            return sectionInsets
+        }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
-    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return sectionInsets.left
+        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }

@@ -29,6 +29,14 @@ public class HistoricalImage: NSManagedObject {
         parentGroup = parent
     }
     
+    var isWide: Bool {
+        imageWidth > imageHeight
+    }
+    
+    var aspectRatio: CGFloat {
+        CGFloat(imageWidth) / CGFloat(imageHeight)
+    }
+    
     func cacheThumbnailImage(completion: ((_ image: UIImage?, _ success: Bool) -> ())? ) {
         guard let thumbnailString = thumbnailURL,
               let thumbnailURL = URL(string: thumbnailString)

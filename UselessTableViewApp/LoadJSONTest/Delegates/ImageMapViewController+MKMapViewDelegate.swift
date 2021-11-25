@@ -24,6 +24,7 @@ extension ImageMapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        mapView.deselectAnnotation(view.annotation, animated: false)
         guard let imageGroup = view.annotation as? ImageGroup else {return}
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: ClusterDetailViewController.storyboardID) as? ClusterDetailViewController
@@ -50,9 +51,11 @@ extension ImageMapViewController: MKMapViewDelegate {
         // that whenever possible
         if let annotationUpdate = delegate?.imageMap(self, annotationsForRegion: imageMap.region, withPriorAnnotations: priorAnnotations) {
             imageMap.addAnnotations(annotationUpdate.newAnnotations)
+            if imageMap.annotations.count > maxAnnotations {
+                cullAnnotations()
+            }
         }
     }
-    
     
     /// Have nearby image annotations popup and shrink while the map is scrolling
     /// - Parameter mapView: the map view
@@ -129,5 +132,12 @@ extension ImageMapViewController: MKMapViewDelegate {
         
         
         return (addedAnnotations: newImageGroups, removedAnnotations: removedImageGroups)
+    }
+    
+    func cullAnnotations() {
+        let farAnnotations = imageMap.annotations.filter {
+            MKMapPoint($0.coordinate).distance(to: MKMapPoint(imageMap.centerCoordinate)) > 800
+        }
+        imageMap.removeAnnotations(farAnnotations)
     }
 }

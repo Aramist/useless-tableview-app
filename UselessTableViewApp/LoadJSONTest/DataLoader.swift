@@ -75,7 +75,6 @@ class DataLoader {
     
     fileprivate func fetchImages(inRange coordinateRange: [(Float, Float)], withContext context: NSManagedObjectContext) throws -> [ImageGroup]?{
         let request = ImageGroup.fetchRequest()
-//        request.fetchLimit = 10
         let predicate = NSPredicate(
             format: "(%K >= %@) && (%K <= %@) && (%K >= %@) && (%K <= %@)",
             argumentArray: [
@@ -86,8 +85,6 @@ class DataLoader {
             ]
         )
         request.predicate = predicate
-        
-//        request.propertiesToFetch = ["latitude", "longitude", "images"]
         
         do {
             let nearbyImages = try context.fetch(request)
@@ -137,8 +134,8 @@ class DataLoader {
 extension DataLoader: ImageMapViewControllerDelegate {
     func imageMap(_ mapView: ImageMapViewController, annotationsForRegion region: MKCoordinateRegion, withPriorAnnotations prior: [ImageGroup]) -> (newAnnotations: [ImageGroup], staleAnnotations: [ImageGroup]) {
         let coordRange = [
-            (Float(region.center.latitude - 2e-3), Float(region.center.longitude - 2e-3)),
-            (Float(region.center.latitude + 2e-3), Float(region.center.longitude + 2e-3))
+            (Float(region.center.latitude - 3e-3), Float(region.center.longitude - 3e-3)),
+            (Float(region.center.latitude + 3e-3), Float(region.center.longitude + 3e-3))
         ]
         
         guard dataSuccessfullyLoaded else {

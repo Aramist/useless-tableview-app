@@ -18,6 +18,7 @@ class ImageMapViewController: UIViewController {
     // Adding -5 allows the delegate's didChangeVisibleRegion to run on initialization
     var lastVicinityCheckTime = Date().addingTimeInterval(-5)
     var activeImageAnnotations: [ImageGroup] = []
+    let maxAnnotations = 50
     
     
     deinit {
@@ -27,6 +28,9 @@ class ImageMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.honeydew]
+        navigationController?.navigationBar.backgroundColor = .imperialRed
         
         delegate = DataLoader()
         imageMap.delegate = self
@@ -50,6 +54,11 @@ class ImageMapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mapViewDidChangeVisibleRegion(imageMap)
     }
 }
 

@@ -11,14 +11,16 @@ import CloudKit
 
 class ImageAnnotationView: UIView {
     
-    let marginWidth: CGFloat = 8
+    let marginWidth: CGFloat = 4
     let cornerPointHeight: CGFloat = 20
     let cornerPointWidth: CGFloat = 10
-    let cornerRadius: CGFloat = 5
+    let cornerRadius: CGFloat = 4
     let annotationWidth: CGFloat = 90
     let clusterCountRadius: CGFloat = 10
     
-    var imageView: UIImageView = {
+    var isShowing: Bool = false
+    
+    var historicalImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -46,7 +48,6 @@ class ImageAnnotationView: UIView {
     }()
     
     var aspectRatioConstraint: NSLayoutConstraint?
-    
     var previewImage: HistoricalImage?
     var clusterSize: Int = 0
     
@@ -72,23 +73,29 @@ class ImageAnnotationView: UIView {
     }
     
     func show() {
-        guard isHidden else {return}
+        guard !isShowing else {return}
+        isShowing = true
+        isHidden = false
+        
+        transform = CGAffineTransform.identity
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-        animation.values = [0.05, 1.2, 0.8, 1.0]
+        animation.values = [0.005, 1.2, 0.8, 1.0]
         animation.keyTimes = [0.0, 0.15, 0.3, 0.60]
         animation.duration = 0.60
-        isHidden = false
         layer.add(animation, forKey: "bounceAnimation")
     }
     
     func hide() {
-        guard !isHidden else {return}
+        guard isShowing else {return}
+        isShowing = false
+        
         CATransaction.begin()
         CATransaction.setCompletionBlock { [weak self] in
             self?.isHidden = true
         }
+        transform = transform.scaledBy(x: 0.005, y: 0.005)
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-        animation.values = [1.0, 0.05]
+        animation.values = [1.0, 0.00]
         animation.keyTimes = [0.0, 0.30]
         animation.duration = 0.30
         layer.add(animation, forKey: "bounceAnimation")
@@ -104,7 +111,7 @@ class ImageAnnotationView: UIView {
             removeConstraint(aspectRatioConstraint)
         }
         aspectRatioConstraint = nil
-        imageView.image = nil
+        historicalImage.image = nil
         previewImage = nil
     }
     
@@ -115,7 +122,7 @@ class ImageAnnotationView: UIView {
         layoutMargins = UIEdgeInsets(top: marginWidth, left: marginWidth, bottom: marginWidth + cornerPointHeight, right: marginWidth)
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(imageView)
+        addSubview(historicalImage)
         addSubview(clusterCountView)
         clusterCountView.addSubview(clusterCountLabel)
         clusterCountView.isHidden = true
@@ -123,10 +130,10 @@ class ImageAnnotationView: UIView {
         NSLayoutConstraint.activate([
             // Image and parent constraints
             widthAnchor.constraint(equalToConstant: annotationWidth),
-            imageView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            historicalImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            historicalImage.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            historicalImage.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            historicalImage.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
             // Cluster count constraints
             clusterCountLabel.centerXAnchor.constraint(equalTo: clusterCountView.centerXAnchor),
             clusterCountLabel.centerYAnchor.constraint(equalTo: clusterCountView.centerYAnchor),
@@ -152,7 +159,8 @@ class ImageAnnotationView: UIView {
 
         
         if let cachedImage = previewImage.thumbnailImage {
-            imageView.image = cachedImage
+            historicalImage.image = cachedImage
+            (superview as? LightweightImageAnnotationView)?.updateOffset()
             // If it is a cluster, add the number of images to the corner
             if clusterSize > 0 {
                 let clusterText = clusterSize > 9 ? "9+" : "\(clusterSize)"
@@ -167,7 +175,8 @@ class ImageAnnotationView: UIView {
                 // Technically success implies cachedImage != nil, but I don't like force unwrapping
                 DispatchQueue.main.async {
                     guard let self = self else {return}
-                    self.imageView.image = cachedImage
+                    self.historicalImage.image = cachedImage
+                    (self.superview as? LightweightImageAnnotationView)?.updateOffset()
                     // If it is a cluster, add the number of images to the corner
                     if self.clusterSize > 0 {
                         let clusterText = self.clusterSize > 9 ? "9+" : "\(self.clusterSize)"
@@ -230,7 +239,7 @@ class ImageAnnotationView: UIView {
             clockwise: true)
         
         drawLayer.path = path.cgPath
-        drawLayer.fillColor = UIColor.honeydew.cgColor
+        drawLayer.fillColor = UIColor.celadonBlue.cgColor
         drawLayer.zPosition = -1
     }
 }
